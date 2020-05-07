@@ -1,0 +1,10 @@
+name: garnett-cli 
+channels:
+  - bioconda
+  - conda-forge 
+  - defaults 
+dependencies:
+  - garnett-cli=0.0.5
+  - bioconductor-singlecellexperiment=1.8.0
+  - bioconductor-org.Hs.eg.db
+  - bioconductor-org.Mm.eg.db
