@@ -3,3 +3,4 @@ dependencies:
   - monocle3-cli=0.0.7
   - r-workflowscriptscommon
   - r-optparse
+  - bioconductor-delayedarray=0.12.0
