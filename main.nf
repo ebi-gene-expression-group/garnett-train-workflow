@@ -9,6 +9,8 @@ process build_train_CDS_object{
     maxRetries 10
     memory { 16.GB * task.attempt }
 
+    maxForks 1
+
     input: 
         file(training_10x_dir) from TRAINING_10X_DIR
 
@@ -33,6 +35,8 @@ process transform_markers{
     errorStrategy { task.exitStatus == 130 || task.exitStatus == 137  ? 'retry' : 'finish' }   
     maxRetries 10
     memory { 16.GB * task.attempt }
+
+    maxForks 1
 
     input:
         file(scxa_markers) from SCXA_MARKER_GENES
@@ -61,6 +65,8 @@ process check_markers{
     maxRetries 10
     memory { 16.GB * task.attempt }
 
+    maxForks 1
+
     input:
         file(marker_genes) from GARNETT_MARKERS
         file(training_cds) from TRAINING_CDS
@@ -88,6 +94,8 @@ process update_markers {
     maxRetries 10
     memory { 16.GB * task.attempt }
 
+    maxForks 1
+
     input:
         file(marker_list) from MARKERS_LIST
         file(marker_summary) from CHECKED_MARKER_GENES
@@ -111,6 +119,8 @@ process train_classifier{
     errorStrategy { task.exitStatus == 130 || task.exitStatus == 137  ? 'retry' : 'finish' }   
     maxRetries 10
     memory { 16.GB * task.attempt }
+
+    maxForks 1
 
     input:
         file(training_cds) from TRAINING_CDS
