@@ -117,7 +117,7 @@ process train_classifier{
         file(marker_genes) from GARNETT_MARKERS_UPD
 
     output:
-        file("trained_classifier.rds") into TRAINED_CLASSIFIER 
+        file("garnett_classifier.rds") into TRAINED_CLASSIFIER 
 
     """
     garnett_train_classifier.R\
