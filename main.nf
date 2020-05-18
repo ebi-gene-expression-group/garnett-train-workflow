@@ -129,7 +129,7 @@ process train_classifier{
             --marker-file-gene-id-type ${params.marker_gene_id_type}\
             --classifier-gene-id-type ${params.classifier_gene_type}\
             -n ${params.n_outgroups}\
-            --output-path trained_classifier.rds 
+            --output-path garnett_classifier.rds
     """
 }
 
