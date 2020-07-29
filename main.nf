@@ -4,10 +4,9 @@
 TRAINING_10X_DIR = Channel.fromPath(params.training_10x_dir)
 process build_train_CDS_object{
     conda "${baseDir}/envs/monocle3-cli.yaml"
-
-    errorStrategy { task.exitStatus == 130 || task.exitStatus == 137  ? 'retry' : 'finish' }   
-    maxRetries 10
+    
     memory { 16.GB * task.attempt }
+    errorStrategy { task.attempt<=10 ? 'retry' : 'ignore' }
 
     input: 
         file(training_10x_dir) from TRAINING_10X_DIR
@@ -30,10 +29,9 @@ SCXA_MARKER_GENES = Channel.fromPath(params.marker_genes).first()
 process transform_markers{
     conda "${baseDir}/envs/garnett-cli.yaml"
 
-    errorStrategy { task.exitStatus == 130 || task.exitStatus == 137  ? 'retry' : 'finish' }   
-    maxRetries 10
     memory { 16.GB * task.attempt }
-
+    errorStrategy { task.attempt<=10 ? 'retry' : 'ignore' }   
+ 
     input:
         file(scxa_markers) from SCXA_MARKER_GENES
 
@@ -57,9 +55,8 @@ process check_markers{
     publishDir "data/output_dir", mode: 'copy'
     conda "${baseDir}/envs/garnett-cli.yaml" 
     
-    errorStrategy { task.exitStatus == 130 || task.exitStatus == 137  ? 'retry' : 'finish' }   
-    maxRetries 10
     memory { 16.GB * task.attempt }
+    errorStrategy { task.attempt<=10 ? 'retry' : 'ignore' }
 
     input:
         file(marker_genes) from GARNETT_MARKERS
@@ -84,9 +81,8 @@ process update_markers {
 
     conda "${baseDir}/envs/garnett-cli.yaml" 
     
-    errorStrategy { task.exitStatus == 130 || task.exitStatus == 137  ? 'retry' : 'finish' }   
-    maxRetries 10
     memory { 16.GB * task.attempt }
+    errorStrategy { task.attempt<=10 ? 'retry' : 'ignore' }
 
     input:
         file(marker_list) from MARKERS_LIST
@@ -108,9 +104,8 @@ process train_classifier{
     publishDir "${params.results_dir}", mode: 'copy'
     conda "${baseDir}/envs/garnett-cli.yaml" 
 
-    errorStrategy { task.exitStatus == 130 || task.exitStatus == 137  ? 'retry' : 'finish' }   
-    maxRetries 10
     memory { 16.GB * task.attempt }
+    errorStrategy { task.attempt<=10 ? 'retry' : 'ignore' }
 
     input:
         file(training_cds) from TRAINING_CDS
