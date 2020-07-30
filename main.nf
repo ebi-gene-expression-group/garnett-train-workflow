@@ -6,7 +6,8 @@ process build_train_CDS_object{
     conda "${baseDir}/envs/monocle3-cli.yaml"
     
     memory { 16.GB * task.attempt }
-    errorStrategy { task.attempt<=10 ? 'retry' : 'ignore' }
+    maxRetries 5
+    errorStrategy { task.attempt<=5 ? 'retry' : 'ignore' }
 
     input: 
         file(training_10x_dir) from TRAINING_10X_DIR
@@ -30,7 +31,8 @@ process transform_markers{
     conda "${baseDir}/envs/garnett-cli.yaml"
 
     memory { 16.GB * task.attempt }
-    errorStrategy { task.attempt<=10 ? 'retry' : 'ignore' }   
+    maxRetries 5
+    errorStrategy { task.attempt<=5 ? 'retry' : 'ignore' }   
  
     input:
         file(scxa_markers) from SCXA_MARKER_GENES
@@ -56,7 +58,8 @@ process check_markers{
     conda "${baseDir}/envs/garnett-cli.yaml" 
     
     memory { 16.GB * task.attempt }
-    errorStrategy { task.attempt<=10 ? 'retry' : 'ignore' }
+    maxRetries 5
+    errorStrategy { task.attempt<=5 ? 'retry' : 'ignore' }
 
     input:
         file(marker_genes) from GARNETT_MARKERS
@@ -82,7 +85,8 @@ process update_markers {
     conda "${baseDir}/envs/garnett-cli.yaml" 
     
     memory { 16.GB * task.attempt }
-    errorStrategy { task.attempt<=10 ? 'retry' : 'ignore' }
+    maxRetries 5
+    errorStrategy { task.attempt<=5 ? 'retry' : 'ignore' }
 
     input:
         file(marker_list) from MARKERS_LIST
@@ -105,7 +109,8 @@ process train_classifier{
     conda "${baseDir}/envs/garnett-cli.yaml" 
 
     memory { 16.GB * task.attempt }
-    errorStrategy { task.attempt<=10 ? 'retry' : 'ignore' }
+    maxRetries 5
+    errorStrategy { task.attempt<=5 ? 'retry' : 'ignore' }
 
     input:
         file(training_cds) from TRAINING_CDS
