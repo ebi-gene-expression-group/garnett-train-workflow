@@ -5,4 +5,4 @@ dependencies:
   - r-workflowscriptscommon
   - r-optparse
   - bioconductor-delayedarray=0.12.0
-  - bioconductor-singlecellexperiment=1.12.0
+
