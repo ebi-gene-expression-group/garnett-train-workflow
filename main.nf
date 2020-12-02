@@ -3,7 +3,7 @@
 // build training CDS object 
 TRAINING_10X_DIR = Channel.fromPath(params.training_10x_dir)
 process build_train_CDS_object{
-    conda "${baseDir}/envs/monocle3-cli.yaml"
+    conda "${baseDir}/envs/garnett-cli.yaml"
     
     memory { 16.GB * task.attempt }
     maxRetries 5
