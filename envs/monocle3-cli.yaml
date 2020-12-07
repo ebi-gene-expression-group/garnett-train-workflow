@@ -1,8 +1,7 @@
 name: monocle3-cli  
 dependencies: 
-  - monocle3-cli=0.0.7
-  - r-monocle3=0.2.0
+  - monocle3-cli
   - r-workflowscriptscommon
   - r-optparse
-  - bioconductor-delayedarray=0.12.0
+
 
