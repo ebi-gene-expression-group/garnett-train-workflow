@@ -1,6 +1,8 @@
 name: monocle3-cli  
 dependencies: 
+  - r-base=3.6
   - monocle3-cli
+  - bioconductor-singlecellexperiment<1.8.0
   - r-workflowscriptscommon
   - r-optparse
 
